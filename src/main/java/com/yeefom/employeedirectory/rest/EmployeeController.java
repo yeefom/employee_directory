@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yeefom.employeedirectory.dao.EmployeeDao;
 import com.yeefom.employeedirectory.entity.Employee;
+import com.yeefom.employeedirectory.service.EmployeeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class EmployeeController {
 
-    private EmployeeDao employeeDao;
+    private EmployeeService employeeService;
 
     @Autowired
-    public EmployeeController(EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/employees")
     public List<Employee> findAll() {
-        return employeeDao.findAll();
+        return employeeService.findAll();
     }
 }
