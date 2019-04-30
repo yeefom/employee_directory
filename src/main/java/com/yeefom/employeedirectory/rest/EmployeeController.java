@@ -2,12 +2,14 @@ package com.yeefom.employeedirectory.rest;
 
 import java.util.List;
 
-import com.yeefom.employeedirectory.dao.EmployeeDao;
 import com.yeefom.employeedirectory.entity.Employee;
 import com.yeefom.employeedirectory.service.EmployeeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,4 +28,17 @@ public class EmployeeController {
     public List<Employee> findAll() {
         return employeeService.findAll();
     }
+
+    @GetMapping("/employees/{id}")
+    public Employee getEmployee(@PathVariable int id) {
+        return employeeService.findById(id);
+    }
+
+    @PostMapping("/employees")
+    public Employee addEmployee(@RequestBody Employee employee) {
+        employee.setId(0); // force item to be saved as new even if id is provided
+        employeeService.save(employee);
+        return employee;
+    }
+
 }
