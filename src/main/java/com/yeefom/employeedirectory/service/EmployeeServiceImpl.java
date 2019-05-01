@@ -8,6 +8,7 @@ import com.yeefom.employeedirectory.dao.EmployeeDao;
 import com.yeefom.employeedirectory.entity.Employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDao employeeDao;
 
     @Autowired
-    public EmployeeServiceImpl(EmployeeDao employeeDao) {
+    public EmployeeServiceImpl(@Qualifier("employeeDaoJpaImpl") EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
     }
 
@@ -34,8 +35,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public void save(Employee employee) {
-        employeeDao.save(employee);
+    public Employee save(Employee employee) {
+        return employeeDao.save(employee);
     }
 
     @Override

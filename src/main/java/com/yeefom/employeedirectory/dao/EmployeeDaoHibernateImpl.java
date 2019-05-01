@@ -38,9 +38,11 @@ public class EmployeeDaoHibernateImpl implements EmployeeDao {
     }
 
     @Override
-    public void save(Employee employee) {
+    public Employee save(Employee employee) {
         Session session = entityManager.unwrap(Session.class);
         session.saveOrUpdate(employee);
+
+        return employee;
     }
 
     @Override

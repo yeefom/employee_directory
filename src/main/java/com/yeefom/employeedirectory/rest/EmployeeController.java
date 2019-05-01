@@ -39,14 +39,12 @@ public class EmployeeController {
     @PostMapping("/employees")
     public Employee addEmployee(@RequestBody Employee employee) {
         employee.setId(0); // force item to be saved as new even if id is provided
-        employeeService.save(employee);
-        return employee;
+        return employeeService.save(employee);
     }
 
     @PutMapping("/employees")
     public Employee updateEmployee(@RequestBody Employee employee) {
-        employeeService.save(employee);
-        return employee;
+        return employeeService.save(employee);
     }
 
     @DeleteMapping("/employees/{id}")
